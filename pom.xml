@@ -3,7 +3,11 @@
   <groupId>testproject1</groupId>
   <artifactId>testproject1</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>testproject1</name>
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+    <name>testproject1</name>
 	<dependencies>
   	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 <dependency>

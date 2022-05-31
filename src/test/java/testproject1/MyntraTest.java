@@ -9,46 +9,46 @@ import org.openqa.selenium.interactions.Actions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class MyntraTest {
+
+    private static final String EMAIL = "sales.infinitycorp@gmail.com";
+    private static final String PASSWORD = "123456";
+
 	public static void main(String[] args) {
 
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
 
-        driver.get("http://tms.pisystindia.com/admin");
         driver.manage().window().maximize();
 
-        WebElement men = driver.findElement(By.xpath("(//a[contains(text(), 'Master')])[1]"));
+        driver.get("http://tms.pisystindia.com/admin");
 
-        Actions action = new Actions(driver);
-        action.moveToElement(men);
-        action.perform();
+        WebElement email = driver.findElement(By.id("admin_email"));
+        WebElement password = driver.findElement(By.id("admin_password"));
+
+        email.sendKeys(EMAIL);
+        password.sendKeys(PASSWORD);
+
+        WebElement login = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div/div[2]/button"));
+        login.click();
 
         try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
+            Thread.sleep(3000);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
-        WebElement phoneCases = driver.findElement(By.xpath("//a[contains(text(), 'Phone Cases')]"));
-        phoneCases.click();
+        WebElement emailPromotion = driver.findElement(By.xpath("/html/body/div[1]/div/div/ul/li[9]/a"));
+        emailPromotion.click();
+
         try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
+            Thread.sleep(3000);
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
 
-        WebElement price = driver.findElement(By.xpath("(//span[contains(@class, 'product-discountedPrice')])[1]"));
-        String amount = price.getText();
-        amount = amount.split(" ")[1];
 
-        if(amount.equals("849")) {
-            System.out.println("Test case passed");
-        }
-        else {
-            System.out.println("Test case failed");
-        }
 
         driver.quit();
     }
