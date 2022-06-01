@@ -8,6 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import java.util.List;
+
 public class MyntraTest {
 
     private static final String EMAIL = "sales.infinitycorp@gmail.com";
@@ -48,7 +50,26 @@ public class MyntraTest {
             e.printStackTrace();
         }
 
+        WebElement search = driver.findElement(By.xpath("//*[@id=\"example_filter\"]/label/input"));
+        search.sendKeys("demo");
 
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@class=\"table table-striped table-bordered dataTable no-footer\"]/tbody/tr"));
+
+        try {
+            Thread.sleep(3000);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int count = rows.size();
+
+        if(count > 0) {
+            System.out.println("No. of records retrieved: " + count);
+        }
+        else {
+            System.out.println("No records retrieved");
+        }
 
         driver.quit();
     }
